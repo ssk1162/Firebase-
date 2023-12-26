@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "608174563857",
+    "project_id": "testkotlinapp-827cc",
+    "storage_bucket": "testkotlinapp-827cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608174563857:android:2ee83cc216e98a407fc7b0",
+        "android_client_info": {
+          "package_name": "com.howlstagram.testkotlinapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDawMaVABFm330XXnrVJe5aI5xl5Hgk2To"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
