@@ -3,6 +3,7 @@ package com.howlstagram.testkotlinapp.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.howlstagram.testkotlinapp.MainActivity
@@ -27,6 +28,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun setObserve() {
+        loginViewModel.toastMessage.observe(this){
+            if (!it.isEmpty()) {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        }
         loginViewModel.loginbtn.observe(this) {
             if (it) {
                 startActivity(Intent(this, MainActivity::class.java))
@@ -37,11 +43,6 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(Intent(this, JoinActivity::class.java))
             }
         }
-    }
-
-    fun login() {
-        println("login")
-        loginViewModel.loginbtn.value = true
     }
 
     fun join() {
