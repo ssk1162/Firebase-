@@ -3,8 +3,11 @@ package com.howlstagram.testkotlinapp.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.common.api.ApiException
 import com.howlstagram.testkotlinapp.R
 import com.howlstagram.testkotlinapp.databinding.ActivityJoinBinding
 
@@ -34,6 +37,5 @@ class JoinActivity : AppCompatActivity() {
         }
 
     }
-
 
 }

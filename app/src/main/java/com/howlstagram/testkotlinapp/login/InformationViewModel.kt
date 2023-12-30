@@ -45,6 +45,7 @@ class InformationViewModel : ViewModel() {
         firestore.collection("findInfo").document().set(findModel).addOnCompleteListener {
             if (it.isSuccessful) {
                 nextPage.value = true
+                auth.currentUser?.sendEmailVerification()
             } else {
 
             }
@@ -59,10 +60,9 @@ class InformationViewModel : ViewModel() {
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     InfoActivity.value = true
-                } else {
-
                 }
             }
     }
+
 
 }

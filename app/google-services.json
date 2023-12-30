@@ -12,7 +12,20 @@
           "package_name": "com.howlstagram.testkotlinapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "608174563857-89n7e2u8hcp6sq30r06b80ni31ns8ifq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.howlstagram.testkotlinapp",
+            "certificate_hash": "2737d9d340f28ac04ad7f7ecfd59f88a182f9cf7"
+          }
+        },
+        {
+          "client_id": "608174563857-deq2c5me6ald38pgrrb2tluu9b64b9qn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDawMaVABFm330XXnrVJe5aI5xl5Hgk2To"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608174563857-deq2c5me6ald38pgrrb2tluu9b64b9qn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

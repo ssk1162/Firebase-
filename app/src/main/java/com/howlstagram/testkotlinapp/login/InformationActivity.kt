@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import com.howlstagram.testkotlinapp.MainActivity
 import com.howlstagram.testkotlinapp.R
 import com.howlstagram.testkotlinapp.databinding.ActivityInformationBinding
 
@@ -27,7 +28,7 @@ class InformationActivity : AppCompatActivity() {
         informationViewModel.nextPage.observe(this) {
             if (it) {
                 finish()
-                startActivity(Intent(this, LoginActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
             }
         }
     }

@@ -11,12 +11,12 @@
         android:icon="@drawable/ic_baseline_search_24"
         android:title="search" />
     <item
-        android:id="@+id/action_add_photo"
+        android:id="@+id/action_up"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_thumb_up_24"
         android:title="up" />
     <item
-        android:id="@+id/action_favorite_alarm"
+        android:id="@+id/action_user"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="user" />

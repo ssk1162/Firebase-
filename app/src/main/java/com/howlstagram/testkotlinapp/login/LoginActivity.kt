@@ -4,8 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.common.api.ApiException
 import com.howlstagram.testkotlinapp.MainActivity
 import com.howlstagram.testkotlinapp.R
 import com.howlstagram.testkotlinapp.databinding.ActivityLoginBinding
@@ -43,11 +46,28 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(Intent(this, JoinActivity::class.java))
             }
         }
+        loginViewModel.InfoActivity.observe(this) {
+            if (it) {
+                finish()
+                startActivity(Intent(this, InformationActivity::class.java))
+            }
+        }
+
     }
 
     fun join() {
         println("join")
         loginViewModel.joinbtn.value = true
     }
+
+    var googleLoginResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            var data = result.data
+            var task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            var account = task.getResult(ApiException::class.java)
+            account.idToken
+            loginViewModel.firebaseAutWithGoogle(account.idToken)
+
+        }
 
 }

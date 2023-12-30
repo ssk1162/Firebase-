@@ -1,14 +1,20 @@
 package com.howlstagram.testkotlinapp.login
 
 import android.app.Application
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
+import com.howlstagram.testkotlinapp.R
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     var auth = FirebaseAuth.getInstance()
 
@@ -16,23 +22,39 @@ class LoginViewModel : ViewModel() {
     var userid: MutableLiveData<String> = MutableLiveData("")
     var userpassword: MutableLiveData<String> = MutableLiveData("")
 
+    // 메인/회원가입
     var loginbtn: MutableLiveData<Boolean> = MutableLiveData(false)
     var joinbtn: MutableLiveData<Boolean> = MutableLiveData(false)
 
+    // 상세 정보입력
+    var InfoActivity: MutableLiveData<Boolean> = MutableLiveData(false)
+
     var toastMessage = MutableLiveData("")
 
-    fun loginsign() {
-        auth?.signInWithEmailAndPassword(userid.value.toString(), userpassword.value.toString())
-            ?.addOnCompleteListener {
+    val context = getApplication<Application>()
+    var googleSignInClient: GoogleSignInClient
 
-                if (it.isSuccessful) {
-                    goMain(it.result?.user)
-                } else if (userid.value == null || userpassword.value == null) {
-                    toastMessage.value = "정보를 입력하세요"
-                } else {
-                    toastMessage.value = "정보가 맞지 않습니다"
+    init {
+        var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(context.getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(context, gso)
+    }
+
+    fun loginsign() {
+        if (userid.value.toString().equals("") || userpassword.value.toString().equals("")) {
+            toastMessage.value = "아이디와 비밀번호를 입력하세요"
+        } else {
+            auth?.signInWithEmailAndPassword(userid.value.toString(), userpassword.value.toString())
+                ?.addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        goMain(it.result?.user)
+                    } else {
+                        toastMessage.value = "로그인 실패"
+                    }
                 }
-            }
+        }
     }
 
     fun goMain(user: FirebaseUser?) {
@@ -42,4 +64,25 @@ class LoginViewModel : ViewModel() {
     }
 
 
+    // LoginActivity에 있는 googleLoginResult와 연결
+    fun loginGoogle(view: View) {
+        var i = googleSignInClient.signInIntent
+        (view.context as? LoginActivity)?.googleLoginResult?.launch(i)
+    }
+
+    // 구글 회원가입
+    fun firebaseAutWithGoogle(idToken: String?) {
+        val creadential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(creadential).addOnCompleteListener {
+            if (it.isSuccessful) {
+                if (it.result.user?.isEmailVerified == true) {
+                    loginbtn.value = true
+                    println("로그인")
+                } else {
+                    InfoActivity.value = true
+                    println("상세")
+                }
+            }
+        }
+    }
 }
