@@ -4,15 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.howlstagram.testkotlinapp.model.FindModel
 import java.text.SimpleDateFormat
-
-data class FindModel(
-    var email: String? = null,
-    var nickname: String? = null,
-    var phoneNumber: String? = null,
-    var address: String? = null,
-    var timestamp: String
-)
 
 class InformationViewModel : ViewModel() {
 
@@ -39,7 +32,6 @@ class InformationViewModel : ViewModel() {
 
     // 정보 저장
     fun saveInfo() {
-
         var findModel = FindModel(auth.currentUser?.email, inputnickname, inputphoneNumber, inputaddress, inputtimestamp)
 
         firestore.collection("findInfo").document().set(findModel).addOnCompleteListener {

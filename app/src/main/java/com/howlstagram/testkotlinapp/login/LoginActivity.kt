@@ -15,8 +15,8 @@ import com.howlstagram.testkotlinapp.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
 
-    lateinit var binding : ActivityLoginBinding
-    val loginViewModel : LoginViewModel by viewModels()
+    lateinit var binding: ActivityLoginBinding
+    val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun setObserve() {
-        loginViewModel.toastMessage.observe(this){
+        loginViewModel.toastMessage.observe(this) {
             if (!it.isEmpty()) {
                 Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             }
@@ -58,6 +58,15 @@ class LoginActivity : AppCompatActivity() {
     fun join() {
         println("join")
         loginViewModel.joinbtn.value = true
+    }
+
+    // 로그인 유지
+    override fun onStart() {
+        super.onStart()
+        val log = GoogleSignIn.getLastSignedInAccount(this)
+        if (log !== null) {
+            loginViewModel.maintain()
+        }
     }
 
     var googleLoginResult =

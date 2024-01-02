@@ -26,6 +26,8 @@ class HomeFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
+        binding.lifecycleOwner = this
+
         return binding.root
     }
 

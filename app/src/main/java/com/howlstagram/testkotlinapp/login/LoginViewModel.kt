@@ -1,6 +1,7 @@
 package com.howlstagram.testkotlinapp.login
 
 import android.app.Application
+import android.content.SharedPreferences
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
@@ -34,6 +35,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     val context = getApplication<Application>()
     var googleSignInClient: GoogleSignInClient
 
+
     init {
         var gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(context.getString(R.string.default_web_client_id))
@@ -50,6 +52,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                 ?.addOnCompleteListener {
                     if (it.isSuccessful) {
                         goMain(it.result?.user)
+                        toastMessage.value = "로그인"
                     } else {
                         toastMessage.value = "로그인 실패"
                     }
@@ -63,6 +66,9 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun maintain() {
+        goMain(auth.currentUser)
+    }
 
     // LoginActivity에 있는 googleLoginResult와 연결
     fun loginGoogle(view: View) {

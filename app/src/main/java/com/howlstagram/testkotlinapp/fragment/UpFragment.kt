@@ -25,6 +25,8 @@ class UpFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_up, container, false)
 
+        binding.lifecycleOwner = this
+
         return binding.root
     }
 
