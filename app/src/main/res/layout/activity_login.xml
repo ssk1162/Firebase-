@@ -99,6 +99,16 @@
 
                 android:text="Google 로그인" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:onClick="@{() -> activity.loginFacebook()}"
+                android:id="@+id/facebook_btn"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_signin_facebook"
+
+                android:text="Google 로그인" />
+
         </LinearLayout>
 
     </RelativeLayout>

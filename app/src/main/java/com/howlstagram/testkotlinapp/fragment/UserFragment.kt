@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.google.firebase.auth.FirebaseAuth
 import com.howlstagram.testkotlinapp.R
 import com.howlstagram.testkotlinapp.databinding.FragmentUserBinding
@@ -44,6 +43,7 @@ class UserFragment : Fragment() {
             Toast.makeText(activity, "로그아웃", Toast.LENGTH_SHORT).show()
             startActivity(Intent(activity, LoginActivity::class.java))
         }
+
 
 
         return binding.root

@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">TestKotlinApp</string>
+
+    <string name="facebook_app_id">1705843489891139</string>
+    <string name="fb_login_protocol_scheme">fb41c36e89394f1f81407621d503d39dd6</string>
+    <string name="facebook_client_token">41c36e89394f1f81407621d503d39dd6</string>
+
     <string name="title_activity_login2">LoginActivity2</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>

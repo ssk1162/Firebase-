@@ -7,12 +7,15 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.facebook.AccessToken
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
 import com.howlstagram.testkotlinapp.R
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
@@ -29,6 +32,8 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     // 상세 정보입력
     var InfoActivity: MutableLiveData<Boolean> = MutableLiveData(false)
+
+    val userData = MutableLiveData<Map<String, Any>>()
 
     var toastMessage = MutableLiveData("")
 
@@ -79,6 +84,20 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     // 구글 회원가입
     fun firebaseAutWithGoogle(idToken: String?) {
         val creadential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(creadential).addOnCompleteListener {
+            if (it.isSuccessful) {
+                if (it.result.user?.isEmailVerified == true) {
+                    loginbtn.value = true
+                    println("로그인")
+                } else {
+                    InfoActivity.value = true
+                    println("상세")
+                }
+            }
+        }
+    }
+    fun firebaseAuthWithFacebook(accessToken: AccessToken) {
+        val creadential = FacebookAuthProvider.getCredential(accessToken.token)
         auth.signInWithCredential(creadential).addOnCompleteListener {
             if (it.isSuccessful) {
                 if (it.result.user?.isEmailVerified == true) {
