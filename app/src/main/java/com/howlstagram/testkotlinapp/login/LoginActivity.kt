@@ -112,10 +112,6 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    fun join() {
-        println("join")
-        loginViewModel.joinbtn.value = true
-    }
 
     // 로그인 유지
     override fun onStart() {

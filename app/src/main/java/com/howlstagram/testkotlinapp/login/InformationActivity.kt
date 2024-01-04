@@ -3,6 +3,7 @@ package com.howlstagram.testkotlinapp.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.howlstagram.testkotlinapp.MainActivity
@@ -25,6 +26,11 @@ class InformationActivity : AppCompatActivity() {
     }
 
     fun setObserve() {
+        informationViewModel.toastMessage.observe(this) {
+            if (!it.isEmpty()) {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        }
         informationViewModel.nextPage.observe(this) {
             if (it) {
                 finish()

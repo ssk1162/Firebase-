@@ -2,24 +2,27 @@ package com.howlstagram.testkotlinapp.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
 import com.howlstagram.testkotlinapp.R
 import com.howlstagram.testkotlinapp.databinding.FragmentUserBinding
 import com.howlstagram.testkotlinapp.login.LoginActivity
 
+data class SelectUser(var nickname: String? = null, var timestamp: String? = null)
 class UserFragment : Fragment() {
 
     lateinit var binding: FragmentUserBinding
-    val fragmentViewModel: FragmentViewModel by viewModels()
 
     var auth = FirebaseAuth.getInstance()
+    var firestore = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,21 +37,43 @@ class UserFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user, container, false)
 
-        binding.viewModel = fragmentViewModel
         binding.lifecycleOwner = this
 
+        user()
 
         binding.logoutBtn.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            Toast.makeText(activity, "로그아웃", Toast.LENGTH_SHORT).show()
+            auth.signOut()
             startActivity(Intent(activity, LoginActivity::class.java))
+            Toast.makeText(activity, "로그아웃", Toast.LENGTH_SHORT).show()
         }
-
-
 
         return binding.root
 
     }
+
+
+    // 유저 데이터 가져오기
+    private fun user() {
+        if (auth.currentUser != null) {
+            firestore.collection("findInfo").document(auth.currentUser?.uid.toString()).get().addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        val document: DocumentSnapshot = it.getResult()
+                        val datauser = document.toObject(SelectUser::class.java)
+
+                        Log.d("datauser", "${datauser?.nickname}")
+                        binding.username.text = datauser?.nickname
+
+                        Log.d("datauser", "${datauser?.timestamp}")
+                        binding.usertime.text = datauser?.timestamp
+                    } else {
+                        Log.d("datauser", "없음")
+                    }
+                }
+        }
+    }
+
+
+
 
 
 }

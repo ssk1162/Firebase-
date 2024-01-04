@@ -3,24 +3,22 @@ package com.howlstagram.testkotlinapp.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContracts
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.common.api.ApiException
 import com.howlstagram.testkotlinapp.R
 import com.howlstagram.testkotlinapp.databinding.ActivityJoinBinding
 
 class JoinActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityJoinBinding
-    val informationViewModel: InformationViewModel by viewModels()
+    val loginViewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_join)
 
-        binding.infoViewModel = informationViewModel
+        binding.viewModel = loginViewModel
 
         binding.lifecycleOwner = this
 
@@ -29,7 +27,12 @@ class JoinActivity : AppCompatActivity() {
     }
 
     fun setObserve() {
-        informationViewModel.InfoActivity.observe(this) {
+        loginViewModel.toastMessage.observe(this) {
+            if (!it.isEmpty()) {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        }
+        loginViewModel.InfoActivity.observe(this) {
             if (it) {
                 finish()
                 startActivity(Intent(this, InformationActivity::class.java))

@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="infoViewModel"
-            type="com.howlstagram.testkotlinapp.login.InformationViewModel" />
+            name="viewModel"
+            type="com.howlstagram.testkotlinapp.login.LoginViewModel" />
     </data>
 
     <RelativeLayout
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:text="@={infoViewModel.emailid}"
+                    android:text="@={viewModel.emailid}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="이메일" />
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:text="@={infoViewModel.password}"
+                    android:text="@={viewModel.password}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="비밀번호" />
@@ -80,7 +80,7 @@
             android:layout_marginRight="20dp">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:onClick="@{() -> infoViewModel.joinSign()}"
+                android:onClick="@{() -> viewModel.joinSign()}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="확인" />
