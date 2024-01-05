@@ -45,7 +45,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx'
 //    implementation 'com.google.firebase:firebase-storage-ktx'
 
+
     implementation 'com.google.android.gms:play-services-auth:20.4.1'
+
+    implementation "com.kakao.sdk:v2-user:2.12.1"
 
     implementation 'com.facebook.android:facebook-android-sdk:12.3.0'
 

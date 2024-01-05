@@ -12,11 +12,14 @@ import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
 import com.howlstagram.testkotlinapp.R
+import com.kakao.sdk.user.UserApiClient
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     var auth = FirebaseAuth.getInstance()
+    var firestore = FirebaseFirestore.getInstance()
 
     // 로그인 아이디 비밀번호 입력
     var userid: MutableLiveData<String> = MutableLiveData("")
@@ -125,6 +128,9 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    // 카카오 회원가입 및 로그인
+
+
     // 페이스북 회원가입 및 로그인
     fun firebaseAuthWithFacebook(accessToken: AccessToken) {
         val creadential = FacebookAuthProvider.getCredential(accessToken.token)
@@ -141,4 +147,5 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
+
 }

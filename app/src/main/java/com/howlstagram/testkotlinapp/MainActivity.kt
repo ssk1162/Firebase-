@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.lifecycleOwner = this
 
+
         // 실행 하자마자 보여주는 뷰
         supportFragmentManager.beginTransaction().replace(R.id.main_content, HomeFragment()).commit()
 

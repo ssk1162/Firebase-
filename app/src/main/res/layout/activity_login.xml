@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="activity"
             type="com.howlstagram.testkotlinapp.login.LoginActivity" />
@@ -41,10 +42,10 @@
 
                 <EditText
                     android:id="@+id/ed_id"
-                    android:text="@={viewModel.userid}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="이메일" />
+                    android:hint="이메일"
+                    android:text="@={viewModel.userid}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,18 +55,18 @@
 
                 <EditText
                     android:id="@+id/ed_password"
-                    android:text="@={viewModel.userpassword}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="비밀번호" />
+                    android:hint="비밀번호"
+                    android:text="@={viewModel.userpassword}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/login_btn"
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:onClick="@{() -> viewModel.loginsign()}"
                 android:text="로그인" />
 
@@ -90,24 +91,31 @@
                 android:text="회원가입" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:onClick="@{(view) -> viewModel.loginGoogle(view)}"
                 android:id="@+id/google_btn"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/btn_signin_google"
+                android:onClick="@{(view) -> viewModel.loginGoogle(view)}"
 
                 android:text="Google 로그인" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:onClick="@{() -> activity.loginFacebook()}"
                 android:id="@+id/facebook_btn"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/btn_signin_facebook"
+                android:onClick="@{() -> activity.loginFacebook()}"
 
-                android:text="Google 로그인" />
+                android:text="페이스북 로그인" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/kakao_btn"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/kakao_login_medium_wide" />
 
         </LinearLayout>
 
