@@ -1,23 +1,13 @@
 package com.howlstagram.testkotlinapp.login
 
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.login.LoginBehavior
-import com.facebook.login.LoginManager
-import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import com.howlstagram.testkotlinapp.MainActivity
@@ -26,17 +16,14 @@ import com.howlstagram.testkotlinapp.databinding.ActivityLoginBinding
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.user.UserApiClient
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
 import java.util.*
 
 
 class LoginActivity : AppCompatActivity() {
 
-    val TAG = "LoginActivity"
     lateinit var binding: ActivityLoginBinding
     val loginViewModel: LoginViewModel by viewModels()
-    lateinit var callbackManager: CallbackManager
+//    lateinit var callbackManager: CallbackManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,25 +33,22 @@ class LoginActivity : AppCompatActivity() {
         binding.activity = this
 
         binding.lifecycleOwner = this
-        callbackManager = CallbackManager.Factory.create()
+//        callbackManager = CallbackManager.Factory.create()
 
         setObserve()
-        printHashKey(this)
+//        printHashKey(this)
 
 
-
-
-
-
+        // 카카오 로그인 정보 확인
         UserApiClient.instance.accessTokenInfo { tokenInfo, error ->
-                if (error != null) {
-                    Toast.makeText(this, "실패", Toast.LENGTH_SHORT).show()
-                } else if (tokenInfo != null) {
-                    Toast.makeText(this, "성공", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
-                    finish()
-                }
+            if (error != null) {
+                Log.d("실패","실패")
+            } else if (tokenInfo != null) {
+                Log.d("성공","성공")
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
+                finish()
+            }
         }
 
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
@@ -95,18 +79,19 @@ class LoginActivity : AppCompatActivity() {
                     }
                     error.toString() == AuthErrorCause.Unauthorized.toString() -> {
                         Toast.makeText(this, "앱이 요청 권한이 없음", Toast.LENGTH_SHORT).show()
-                    } else -> {
-                    Toast.makeText(this, "기타 에러", Toast.LENGTH_SHORT).show()
-                }
+                    }
+                    else -> {
+                        Toast.makeText(this, "기타 에러", Toast.LENGTH_SHORT).show()
+                    }
                 }
             } else if (token != null) {
-                Toast.makeText(this, "로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show()
+                Log.d("token : ", "$token")
+                Toast.makeText(this, "로그인", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP))
                 finish()
             }
         }
-
 
 
         binding.kakaoBtn.setOnClickListener {
@@ -118,55 +103,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-
-
-
-
-
-
-
     }
 
-
-
-    fun loginFacebook() {
-        var loginManager = LoginManager.getInstance()
-        loginManager.loginBehavior = LoginBehavior.WEB_ONLY
-        loginManager.logInWithReadPermissions(this, Arrays.asList("public_profile", "email"))
-        loginManager.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
-            override fun onCancel() {
-
-            }
-
-            override fun onError(error: FacebookException) {
-
-            }
-
-            override fun onSuccess(result: LoginResult) {
-                val token = result.accessToken
-                loginViewModel.firebaseAuthWithFacebook(token)
-            }
-
-        })
-    }
-
-
-    fun printHashKey(pContext: Context) {
-        try {
-            val info: PackageInfo = pContext.getPackageManager()
-                .getPackageInfo(pContext.getPackageName(), PackageManager.GET_SIGNATURES)
-            for (signature in info.signatures) {
-                val md = MessageDigest.getInstance("SHA")
-                md.update(signature.toByteArray())
-                val hashKey = String(Base64.encode(md.digest(), 0))
-                Log.i(TAG, "printHashKey() Hash Key: $hashKey")
-            }
-        } catch (e: NoSuchAlgorithmException) {
-            Log.e(TAG, "printHashKey()", e)
-        } catch (e: Exception) {
-            Log.e(TAG, "printHashKey()", e)
-        }
-    }
 
     fun setObserve() {
         loginViewModel.toastMessage.observe(this) {
@@ -213,9 +151,6 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        callbackManager.onActivityResult(requestCode, resultCode, data)
-    }
+
 
 }

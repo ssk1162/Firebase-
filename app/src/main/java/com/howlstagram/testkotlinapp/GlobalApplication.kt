@@ -10,6 +10,9 @@ class GlobalApplication : Application() {
 
         KakaoSdk.init(this, getString(R.string.native_app_key))
 
+//        val key = Utility.getKeyHash(this)
+//        Log.d("key : ","$key")
+
     }
 
 }

@@ -4,17 +4,14 @@ import android.app.Application
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.facebook.AccessToken
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import com.howlstagram.testkotlinapp.R
-import com.kakao.sdk.user.UserApiClient
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -28,6 +25,9 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     // 메인/회원가입 버튼
     var loginbtn: MutableLiveData<Boolean> = MutableLiveData(false)
     var joinbtn: MutableLiveData<Boolean> = MutableLiveData(false)
+
+    var kakaoBtn: MutableLiveData<Boolean> = MutableLiveData(false)
+
 
     // 회원가입 아이디 비밀번호 입력
     var emailid: MutableLiveData<String> = MutableLiveData("")
@@ -128,24 +128,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    // 카카오 회원가입 및 로그인
 
-
-    // 페이스북 회원가입 및 로그인
-    fun firebaseAuthWithFacebook(accessToken: AccessToken) {
-        val creadential = FacebookAuthProvider.getCredential(accessToken.token)
-        auth.signInWithCredential(creadential).addOnCompleteListener {
-            if (it.isSuccessful) {
-                if (it.result.user?.isEmailVerified == true) {
-                    goMain(it.result?.user)
-                    println("로그인")
-                } else {
-                    // 메일이 인증 되지 않으면 정보 입력창으로
-                    InfoActivity.value = true
-                    println("상세")
-                }
-            }
-        }
-    }
 
 }

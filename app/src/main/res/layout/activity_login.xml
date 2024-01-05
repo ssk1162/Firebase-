@@ -101,21 +101,22 @@
                 android:text="Google 로그인" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/facebook_btn"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/btn_signin_facebook"
-                android:onClick="@{() -> activity.loginFacebook()}"
-
-                android:text="페이스북 로그인" />
-
-            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/kakao_btn"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/kakao_login_medium_wide" />
+
+            <!--            <androidx.appcompat.widget.AppCompatButton-->
+            <!--                android:id="@+id/facebook_btn"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="45dp"-->
+            <!--                android:layout_marginTop="10dp"-->
+            <!--                android:background="@drawable/btn_signin_facebook"-->
+            <!--                android:onClick="@{() -> activity.loginFacebook()}"-->
+
+            <!--                android:text="페이스북 로그인" />-->
+
 
         </LinearLayout>
 

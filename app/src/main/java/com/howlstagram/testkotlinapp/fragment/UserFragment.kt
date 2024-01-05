@@ -15,6 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.howlstagram.testkotlinapp.R
 import com.howlstagram.testkotlinapp.databinding.FragmentUserBinding
 import com.howlstagram.testkotlinapp.login.LoginActivity
+import com.kakao.sdk.user.UserApiClient
 
 data class SelectUser(var nickname: String? = null, var timestamp: String? = null)
 class UserFragment : Fragment() {
@@ -41,8 +42,20 @@ class UserFragment : Fragment() {
 
         user()
 
+        UserApiClient.instance.me { user, error ->
+            binding.username.text = "${user?.kakaoAccount?.profile?.nickname}"
+        }
+
+
         binding.logoutBtn.setOnClickListener {
             auth.signOut()
+            UserApiClient.instance.logout { error ->
+                if (error != null) {
+                    Log.d("","실패")
+                } else {
+                    Log.d("","성공")
+                }
+            }
             startActivity(Intent(activity, LoginActivity::class.java))
             Toast.makeText(activity, "로그아웃", Toast.LENGTH_SHORT).show()
         }
