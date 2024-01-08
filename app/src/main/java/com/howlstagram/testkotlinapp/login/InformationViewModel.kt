@@ -35,9 +35,6 @@ class InformationViewModel : ViewModel() {
 
     var nextPage = MutableLiveData(false)
 
-    var InfoActivity: MutableLiveData<Boolean> = MutableLiveData(false)
-
-
     // 정보 저장
     fun saveInfo() {
         var inputInfo = InputInfo(

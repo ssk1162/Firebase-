@@ -16,7 +16,6 @@ import com.howlstagram.testkotlinapp.R
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     var auth = FirebaseAuth.getInstance()
-    var firestore = FirebaseFirestore.getInstance()
 
     // 로그인 아이디 비밀번호 입력
     var userid: MutableLiveData<String> = MutableLiveData("")
@@ -25,8 +24,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     // 메인/회원가입 버튼
     var loginbtn: MutableLiveData<Boolean> = MutableLiveData(false)
     var joinbtn: MutableLiveData<Boolean> = MutableLiveData(false)
-
-    var kakaoBtn: MutableLiveData<Boolean> = MutableLiveData(false)
 
 
     // 회원가입 아이디 비밀번호 입력

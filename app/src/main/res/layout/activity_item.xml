@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ItemActivity">
+
+        <ImageView
+            android:id="@+id/item_img"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp" />
+
+        <Button
+            android:id="@+id/photo_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_img"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text="사진 선택" />
+
+        <RelativeLayout
+            android:id="@+id/layoutRelative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/photo_btn">
+
+            <TextView
+                android:id="@+id/name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="25dp"
+                android:text="아이템 이름" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@id/name_tv">
+
+                <EditText
+                    android:id="@+id/name_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/detail_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name_tv"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="80dp"
+                android:text="아이템 내용" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/detailInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nameInput"
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@id/detail_tv">
+
+                <EditText
+                    android:id="@+id/detail_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/pay_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/detail_tv"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="75dp"
+                android:text="아이템 가격" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/payInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/detailInput"
+                android:layout_margin="10dp"
+                android:layout_toRightOf="@id/pay_tv">
+
+                <EditText
+                    android:id="@+id/pay_ed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/result_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layoutRelative"
+            android:layout_margin="20dp"
+            android:text="확인" />
+
+    </RelativeLayout>
+</layout>
