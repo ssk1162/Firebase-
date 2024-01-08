@@ -12,31 +12,11 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="35dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_launcher_background"/>
-
-            </RelativeLayout>
-
-        </androidx.appcompat.widget.Toolbar>
-
         <FrameLayout
             android:id="@+id/main_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/bottom_navi"
-            android:layout_below="@id/toolbar"/>
-
+            android:layout_above="@id/bottom_navi" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navi"
