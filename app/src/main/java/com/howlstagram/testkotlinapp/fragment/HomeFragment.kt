@@ -10,13 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
-import com.howlstagram.testkotlinapp.ItemListAdapter
-import com.howlstagram.testkotlinapp.R
-import com.howlstagram.testkotlinapp.ViewPageAdapter
+import com.howlstagram.testkotlinapp.*
 import com.howlstagram.testkotlinapp.databinding.FragmentHomeBinding
-import com.howlstagram.testkotlinapp.ItemActivity
 import kotlinx.coroutines.Runnable
 
 class HomeFragment : Fragment() {
@@ -44,6 +40,9 @@ class HomeFragment : Fragment() {
 
         binding.viewPage.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
+        binding.recyclerLayout.adapter = ItemListAdapter()
+        binding.recyclerLayout.layoutManager = GridLayoutManager(activity, 3)
+
         // apply 객체의 초기화 블록을 간결하게 표현할 수 있는 함수
         // 객체의 메소드를 호출하고 객체 자체를 반환
         // binding.viewPage를 반복해서 쓰지 않고 여러 메소드를 호출할 수 있어 코드를 간결하게 만들 수 있음
@@ -64,9 +63,6 @@ class HomeFragment : Fragment() {
         }
 
 
-        binding.recyclerLayout.adapter = ItemListAdapter()
-        binding.recyclerLayout.layoutManager = GridLayoutManager(activity, 3)
-
         return binding.root
     }
 
@@ -77,11 +73,13 @@ class HomeFragment : Fragment() {
         sliderHandler.postDelayed(sliderRunnable, 1000)
     }
 
+
     // home에서 사라질 경우 정지
     override fun onPause() {
         super.onPause()
         sliderHandler.removeCallbacks(sliderRunnable)
     }
+
 
     private fun getItemList(): ArrayList<Int> {
 

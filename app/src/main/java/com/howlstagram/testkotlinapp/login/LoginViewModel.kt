@@ -95,8 +95,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         if (userid.value.equals("") || userpassword.value.equals("")) {
             toastMessage.value = "이메일과 비밀번호 6자리 이상을 입력하세요"
         } else {
-            auth?.signInWithEmailAndPassword(userid.value.toString(), userpassword.value.toString())
-                ?.addOnCompleteListener {
+            auth.signInWithEmailAndPassword(userid.value.toString(), userpassword.value.toString()).addOnCompleteListener {
                     if (it.isSuccessful) {
                         goMain(it.result?.user)
                         toastMessage.value = "로그인"

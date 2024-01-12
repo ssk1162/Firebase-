@@ -4,20 +4,21 @@
         android:id="@+id/action_home"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="home" />
+
+        android:title="홈" />
     <item
         android:id="@+id/action_search"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_search_24"
-        android:title="search" />
+        android:title="검색" />
     <item
         android:id="@+id/action_up"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_thumb_up_24"
-        android:title="up" />
+        android:title="찜 목록" />
     <item
         android:id="@+id/action_user"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_person_24"
-        android:title="user" />
+        android:title="마이페이지" />
 </menu>
