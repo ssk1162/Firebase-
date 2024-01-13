@@ -10,12 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.howlstagram.testkotlinapp.databinding.ItemdetailLayoutBinding
+import com.howlstagram.testkotlinapp.databinding.SearchlistLayoutBinding
 import com.howlstagram.testkotlinapp.model.ContentModel
 
 class ItemSearchAdapter(var itemlist: ArrayList<ContentModel>) :
     RecyclerView.Adapter<ItemSearchAdapter.ViewHolder>(), Filterable {
 
-    class ViewHolder(var binding: ItemdetailLayoutBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(var binding: SearchlistLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
     var items = arrayListOf<ContentModel>()
     var itemFilter = ItemFilter()
@@ -38,14 +39,14 @@ class ItemSearchAdapter(var itemlist: ArrayList<ContentModel>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         var view =
-            ItemdetailLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            SearchlistLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var contentModel = items[position]
-        holder.binding.imgName.text = contentModel.itmeName
-        Glide.with(holder.itemView.context).load(contentModel.itemUrl).into(holder.binding.imgView)
+        holder.binding.imgName2.text = contentModel.itmeName
+        Glide.with(holder.itemView.context).load(contentModel.itemUrl).into(holder.binding.imgView2)
 
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, DetailActivity::class.java)
@@ -76,6 +77,9 @@ class ItemSearchAdapter(var itemlist: ArrayList<ContentModel>) :
             if (filterString.trim { it < ' ' }.isEmpty()) {
                 results.values = itemlist
                 results.count = itemlist.size
+
+                return results
+
             } else {
                 for (content in itemlist) {
                     if (content.itmeName!!.contains(filterString)) {
