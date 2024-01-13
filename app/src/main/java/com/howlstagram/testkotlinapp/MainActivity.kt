@@ -3,6 +3,7 @@ package com.howlstagram.testkotlinapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import com.google.android.material.navigation.NavigationBarView
 import com.howlstagram.testkotlinapp.databinding.ActivityMainBinding
 import com.howlstagram.testkotlinapp.fragment.HomeFragment
 import com.howlstagram.testkotlinapp.fragment.SearchFragment
@@ -22,6 +23,8 @@ class MainActivity : AppCompatActivity() {
 
         // 실행 하자마자 보여주는 뷰
         supportFragmentManager.beginTransaction().replace(R.id.main_content, HomeFragment()).commit()
+
+        binding.bottomNavi.labelVisibilityMode = NavigationBarView.LABEL_VISIBILITY_LABELED
 
         binding.bottomNavi.setOnItemSelectedListener {
 
