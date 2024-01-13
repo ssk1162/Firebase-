@@ -38,7 +38,7 @@ class UserFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user, container, false)
 
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         user()
 

@@ -36,12 +36,12 @@ class HomeFragment : Fragment() {
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         binding.viewPage.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
-        binding.recyclerLayout.adapter = ItemListAdapter()
-        binding.recyclerLayout.layoutManager = GridLayoutManager(activity, 3)
+        binding.recyclerView.adapter = ItemListAdapter()
+        binding.recyclerView.layoutManager = GridLayoutManager(activity, 3)
 
         // apply 객체의 초기화 블록을 간결하게 표현할 수 있는 함수
         // 객체의 메소드를 호출하고 객체 자체를 반환
@@ -59,7 +59,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.itemBtn.setOnClickListener {
-            startActivity(Intent(activity, ItemActivity::class.java))
+            startActivity(Intent(activity, ItemInputActivity::class.java))
         }
 
 

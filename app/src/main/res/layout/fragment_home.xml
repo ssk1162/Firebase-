@@ -42,7 +42,7 @@
                 android:text="아이템 등록" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_layout"
+                android:id="@+id/recycler_view"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>

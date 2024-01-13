@@ -24,7 +24,7 @@
         </activity>
 
         <activity
-            android:name=".ItemActivity"
+            android:name=".ItemInputActivity"
             android:exported="false"
             android:screenOrientation="portrait">
 

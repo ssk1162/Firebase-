@@ -15,7 +15,7 @@ import com.howlstagram.testkotlinapp.model.ContentModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ItemActivity : AppCompatActivity() {
+class ItemInputActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityItemBinding
 
