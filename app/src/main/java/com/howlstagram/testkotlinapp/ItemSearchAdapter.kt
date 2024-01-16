@@ -16,7 +16,8 @@ import com.howlstagram.testkotlinapp.model.ContentModel
 class ItemSearchAdapter(var itemlist: ArrayList<ContentModel>) :
     RecyclerView.Adapter<ItemSearchAdapter.ViewHolder>(), Filterable {
 
-    inner class ViewHolder(var binding: SearchlistLayoutBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(var binding: SearchlistLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     var items = arrayListOf<ContentModel>()
     var itemFilter = ItemFilter()
