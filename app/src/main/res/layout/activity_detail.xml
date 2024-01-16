@@ -48,11 +48,18 @@
 
         </LinearLayout>
 
+        <CheckBox
+            android:id="@+id/check_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/pay_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/check_btn"
             android:text="결제하기"
             android:textSize="30dp" />
 

@@ -18,7 +18,7 @@ import com.howlstagram.testkotlinapp.model.ContentModel
 
 class ItemListAdapter : RecyclerView.Adapter<ItemListAdapter.ListGrid>() {
 
-    class ListGrid(var binding: ItemdetailLayoutBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ListGrid(var binding: ItemdetailLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
     var firestore = FirebaseFirestore.getInstance()
     var contentModels = arrayListOf<ContentModel>()

@@ -11,10 +11,10 @@
             android:layout_height="match_parent"
             tools:context=".fragment.UpFragment">
 
-                <TextView
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/upRecycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Up" />
+                    android:layout_height="match_parent"/>
 
         </RelativeLayout>
 </layout>
