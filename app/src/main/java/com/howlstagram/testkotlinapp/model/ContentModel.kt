@@ -9,6 +9,4 @@ data class ContentModel (
     var userId : String? = null, // 유저 이메일
     var timestamp : String? = null // 업로드 시간
     
-) {
-
-}
+)

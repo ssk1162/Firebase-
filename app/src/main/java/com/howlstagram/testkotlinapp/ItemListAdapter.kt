@@ -58,7 +58,6 @@ class ItemListAdapter : RecyclerView.Adapter<ItemListAdapter.ListGrid>() {
 
     }
 
-
     override fun getItemCount(): Int {
         return contentModels.size
     }

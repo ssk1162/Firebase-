@@ -76,7 +76,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         if (emailid.value.equals("") || password.value.equals("")) {
             toastMessage.value = "이메일과 비밀번호를 입력하세요"
         } else if (password.value?.length!! < 0) {
-
+            toastMessage.value = "6자리 이상 입력해 주세요"
         } else {
             auth.createUserWithEmailAndPassword(emailid.value.toString(), password.value.toString())
                 .addOnCompleteListener {

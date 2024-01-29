@@ -55,21 +55,26 @@ class ItemInputActivity : AppCompatActivity() {
         var imgName = "IMAGE_" + timestamp + ".png"
         var storagePath = storage.reference.child("images").child(imgName)
 
-        storagePath.putFile(photoUri!!).continueWithTask {
-            return@continueWithTask storagePath.downloadUrl
-        }.addOnCompleteListener { downloadUrl ->
-            var contentModel = ContentModel()
-            contentModel.uid = auth.uid
-            contentModel.itemUrl = downloadUrl.result.toString()
-            contentModel.itmeName = binding.nameEd.text.toString()
-            contentModel.itemDetail = binding.detailEd.text.toString()
-            contentModel.itemPay = binding.payEd.text.toString()
-            contentModel.timestamp = System.currentTimeMillis().toString()
-            contentModel.userId = auth.currentUser?.email
+        if (photoUri != null) {
+            storagePath.putFile(photoUri!!).continueWithTask {
+                return@continueWithTask storagePath.downloadUrl
+            }.addOnCompleteListener { downloadUrl ->
+                var contentModel = ContentModel()
+                contentModel.uid = auth.uid
+                contentModel.itemUrl = downloadUrl.result.toString()
+                contentModel.itmeName = binding.nameEd.text.toString()
+                contentModel.itemDetail = binding.detailEd.text.toString()
+                contentModel.itemPay = binding.payEd.text.toString()
+                contentModel.timestamp = System.currentTimeMillis().toString()
+                contentModel.userId = auth.currentUser?.email
 
-            firestore.collection("images").document().set(contentModel).addOnCompleteListener {
-                Toast.makeText(this, "업로드 성공", Toast.LENGTH_SHORT).show()
-                finish()
+                firestore.collection("images").document().set(contentModel).addOnSuccessListener {
+                    Toast.makeText(this, "업로드 성공", Toast.LENGTH_SHORT).show()
+                    finish()
+                }.addOnFailureListener {
+                    Toast.makeText(this, "업로드 실패", Toast.LENGTH_SHORT).show()
+                }
+
             }
 
         }

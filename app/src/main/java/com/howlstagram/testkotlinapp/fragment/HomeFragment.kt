@@ -47,7 +47,7 @@ class HomeFragment : Fragment() {
         // 객체의 메소드를 호출하고 객체 자체를 반환
         // binding.viewPage를 반복해서 쓰지 않고 여러 메소드를 호출할 수 있어 코드를 간결하게 만들 수 있음
         binding.viewPage.apply {
-            adapter = ViewPageAdapter(getItemList(), binding.viewPage)
+            adapter = ViewPageAdapter(binding.viewPage)
             offscreenPageLimit = 1
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
